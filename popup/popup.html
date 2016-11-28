@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-type">
+        <link href="../css/extension.css" rel="stylesheet"></link>
+		<link rel="stylesheet" href="panel-style.css" type="text/css" media="screen, projection"/>
+		<title>RATS LOG</title>
+
+        <style media="screen">
+          .icon-section-header {
+            background-image: url("../images/icon-128.png");
+            background-size: contain;
+          }
+
+          .panel-formElements-item label:first-child {
+            min-width: 5em;
+            margin-left: 0;
+          }
+
+          .panel-formElements-item label {
+            margin-left: calc(5em + 6px);
+          }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="panel-section panel-section-header">
+          <div class="icon-section-header"></div>
+          <div class="text-section-header">RATS Manager</div>
+        </div>
+        <div id="1" class="panel-section panel-section-footer">
+            <div class="panel-section-footer-button" id="add"><i class="add button"></i>Add Entry
+                <span class="text-shortcut"></span>
+            </div>
+        </div>
+        <div id="2" class="panel-section panel-section-footer">
+            <div class="panel-section-footer-button" id="log"><i class="log button"></i>View Log
+                <span class="text-shortcut"></span>
+            </div>
+        </div>
+        <div id="3" class="panel-section panel-section-footer">
+            <div class="panel-section-footer-button" id="entry"><i class="entry button"></i>RATS Entry Mode
+                <span class="text-shortcut"></span>
+            </div>
+        </div>
+        <div id="4" class="panel-section panel-section-footer">
+            <div class="panel-section-footer-button" id="export"><i class="export button"></i>Export Log
+                <span class="text-shortcut"></span>
+            </div>
+        </div>
+        <script src="../lib/jquery-3.1.1.min.js"></script>
+        <script src="popup.js"></script>
+    </body>
+</html>

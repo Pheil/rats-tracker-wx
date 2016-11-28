@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-type">
+    <title>RATS ENTRY MODE</title>
+    <link rel="stylesheet" href="ratsentry.css" type="text/css" />
+    <link rel="stylesheet" href="../css/jquery-ui.css">
+    <script src="../lib/jquery-3.1.1.min.js"></script>
+    <script src="../lib/jquery-ui.js"></script>
+</head>
+
+<body>
+<h3>Entries logged between</h3>
+<h3>
+<input type="text" id="from" name="from"> &
+<input type="text" id="to" name="to"></h3>
+<div class="mytable">
+    <table id="rats-log">
+    <thead>
+      <tr>
+        <th class="text">Rats #</th>
+        <th class="number">EWS</th>
+        <th class="number">Wk</th>
+        <th class="text">Desc</th>
+        <th class="number">Hours</th>
+      </tr>
+      </thead>
+      <tbody id="rats-log-tbody">
+      </tbody>
+    </table>
+</div>
+<div class="clr"></div>
+<script type="text/javascript" src="ratsentry.js"></script>
+</body>
+</html>

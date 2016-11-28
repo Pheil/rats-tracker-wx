@@ -1,0 +1,124 @@
+
+@-moz-document url-prefix(){
+    html, body {
+      overflow-x:hidden;
+    }
+}
+
+.button {
+    background: url(../images/btn_icons.png) no-repeat 0 0;
+    display: block;
+    float: left;
+    margin-top: -5px;
+    height: 24px;
+    width: 24px;
+}
+.button2 {
+    background: url(../images/btn_icons.png) no-repeat 0 0;
+    width: 13px;
+    height: 13px;
+    display: block;
+    float: left;
+    margin-top: 1px;
+    margin-left: 15px;
+}
+
+.add {
+    background-position: -24px 0;
+}
+
+.log {
+    background-position: 0 0;
+}
+
+.entry {
+    background-position: -48px 0;
+}
+
+.export {
+    background-position: -72px 0;
+}
+/* input[type="text"] {
+    font-size: 12px;
+    width: 10em;
+    border: 1px solid #cac9c9;
+}
+input[type="number"] {
+    font-size: 12px;
+    -moz-appearance:textfield;
+    width: 5em;
+    border: 1px solid #cac9c9;
+} */
+#ews {
+	width:25%;
+	text-align: center;
+	padding:0px;
+	position:relative;
+}
+
+#rats {
+	width:50%;
+	text-align: center;
+	padding:0px;
+	position:relative;
+}
+#desc {
+	width:100%;
+	padding:0px;
+	position:relative
+}
+
+#hour {
+	width:25%;
+	padding:0px;
+	position:relative;
+}
+
+#addBlock {
+	border: 1px solid #cac9c9;
+	margin-top: 39px;
+	position: absolute;
+}
+
+/* Panel Section - Small Footer */
+.panel-section-footer-small {
+  background-color: rgba(255, 12, 10, 0.3);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  color: #1a1a1a;
+  display: flex;
+  flex-direction: row;
+  height: 21px;
+  margin-top: -1px;
+  padding: 0;
+}
+.panel-section-footer-button-small {
+  flex: 1 1 auto;
+  height: 100%;
+  margin: 0 -1px;
+  padding: 2px;
+  text-align: center;
+  font-size: .847em;
+}
+.panel-section-footer-button-small:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.panel-section-footer-button-small:hover:active {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.panel-section-footer-button-small.default {
+  background-color: #0996f8;
+  box-shadow: 0 1px 0 #0670cc inset;
+  color: #fff;
+}
+
+.panel-section-footer-button-small.default:hover {
+  background-color: #0670cc;
+  box-shadow: 0 1px 0 #005bab inset;
+}
+
+.panel-section-footer-button-small.default:hover:active {
+  background-color: #005bab;
+  box-shadow: 0 1px 0 #004480 inset;
+}

@@ -11,13 +11,6 @@
     "96": "images/icon-96.png",
     "128": "images/icon-128.png"
   },
-
-  "applications": {
-    "gecko": {
-      "id": "FileSearch@tenneco.com",
-      "strict_min_version": "51.0"
-    }
-  },
   
   "permissions": [
     "notifications", 
@@ -25,6 +18,10 @@
     "tabs",
     "clipboardWrite"
   ], 
+
+  "background": {
+    "scripts": ["/lib/pouchdb-6.1.1.js", "js/background.js"]
+  },
   
   "options_ui": {
     "page": "options/options.html"

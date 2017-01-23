@@ -1,37 +1,32 @@
-/*
-Feature detection
- */
-// DON'T use "var indexedDB = ..." if you're not in a function.
-window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+// IndexedDB initializations.
+var db;
 
-window.IDBKeyRange = window.IDBKeyRange || window.webkitIDBKeyRange || window.msIDBKeyRange;
+// Open the file database as "persistent" to get highers quota limits:
+const dbReq = indexedDB.open("savedFilesDB", {version: 1, storage: "persistent"});
 
-if (!window.indexedDB) {
-    window.alert("Your browser doesn't support a stable version of IndexedDB.");
-}
+// Logs errors on opening the db.
+dbReq.onerror = evt => {
+  dbLog(`ERROR: Fail to open indexedDB 'tempFilesDB' db: ${evt.target.error.message}`);
+};
 
-/*
-requestError
- */
-function requestError() {
-    alert('IndexedDB request denied');
-}
+// Create the needed IndexedDB object store.
+dbReq.onupgradeneeded = () => {
+  const db = dbReq.result;
 
-/*
-dbError message from event
- */
-function dbError(event) {
-    alert('Database error: ' + event.target.errorCode);
-}
+  dbLog(`Upgrade savedFilesDB.`);
 
-/*
-notesApp
- */
-function notesApp(event) {
-    this.db = event.target.result;
-    this.db.onerror = dbError;
-}
+  if (!db.objectStoreNames.contains("savedFiles")) {
+    db.createObjectStore("savedFiles");
+  }
+};
 
-var request = window.indexedDB.open("MyNotes", 1);
-request.onerror = requestError;
-request.onsuccess = notesApp;
+// When the db is successfully opened, save its reference in a global accessible var,
+// and update the UI state.
+dbReq.onsuccess = () => {
+  db = dbReq.result;
+
+  
+
+  
+};
+

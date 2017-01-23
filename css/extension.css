@@ -18,7 +18,6 @@ body {
   cursor: default;
   display: flex;
   flex-direction: column;
-  font: Segoe UI;
   margin: 0;
   padding: 0;
   -moz-user-select: none;

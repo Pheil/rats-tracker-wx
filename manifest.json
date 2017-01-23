@@ -20,7 +20,7 @@
   ], 
 
   "background": {
-    "scripts": ["/lib/pouchdb-6.1.1.js", "js/background.js"]
+    "scripts": ["lib/moment.js", "js/background.js"]
   },
   
   "options_ui": {

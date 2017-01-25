@@ -14,17 +14,24 @@ function save_options() {
 }
 
 // Restores state using the preferences stored in chrome.storage.
-function restore_options() {
+// function restore_options() {
 
-  browser.storage.local.get({
-    myHour: 1
-  }, function(items) {
-    document.getElementById('defHour').value = items.myHour;
+  // browser.storage.local.get({
+    // myHour: 1
+  // }, function(items) {
+    // document.getElementById('defHour').value = items.myHour;
+  // });
+// }
+
+function restore_options() {
+  var gettingItem = browser.storage.local.get('myHour');
+  gettingItem.then((res) => {
+    document.querySelector("#defHour").value = res.myHour || "1";
   });
 }
 // Restores state using the preferences stored in chrome.storage.
 function reset_options() {
-    document.getElementById('defHour').value = "";
+    document.getElementById('defHour').value = "1";
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
     status.textContent = 'Options reset.';

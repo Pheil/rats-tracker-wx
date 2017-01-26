@@ -29,8 +29,15 @@
     
     //Remove 'EWS'
     var n = EWSECE.indexOf("EWS"); 
-    if (n > -1){
-        EWSECE = EWSECE.substr(3, 7);
+    var ews_chk = URLlocation.indexOf("in_ewr_");
+    if (ews_chk > -1){
+        //EWS
+        if (n > -1){
+            EWSECE = EWSECE.substr(3, 7);
+        } 
+    } else {
+        //ECE
+        EWSECE = document.querySelector("body > font:nth-child(2) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > font:nth-child(1) > p:nth-child(1) > b:nth-child(1)").textContent
     }
            
     //Add button action
@@ -50,6 +57,7 @@
         chrome.storage.local.set(dataObj, function() {
               console.log('Record saved');
               browser.runtime.sendMessage({"type": "alert","msg": "Job EWS" + EWSECE + " [" + hours + " hours] added to RATS log."});
+              chrome.runtime.sendMessage({"type": "badge","msg": "null"});
             });
         }, false);  
     
@@ -74,7 +82,6 @@
         var hourInp = document.getElementById("hours");
         hourInp.setAttribute('value', myHour);
         hourInp.value = myHour;
-        console.log("test:" + myHour);
     });
     
 function getWeekNumber(d) {

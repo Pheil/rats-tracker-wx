@@ -30,10 +30,12 @@ function popupMsg(message) {
             var timeDiff = Math.abs(theDate.getTime() - startDate2.getTime());
             var diffHours = (Math.ceil(timeDiff / 3.6e6)-48)*0.3333; //-48 to get mon, *.333 to get 8 hours per day (start date is Sat)
             chrome.browserAction.setBadgeText ( { text: weeklyHours.toString() } );
-            if (diffHours - weeklyHours <= 1) {
+            if (diffHours - weeklyHours <= 1 && weeklyHours < 40) {
                 browser.browserAction.setBadgeBackgroundColor({color: "#009900"});
-            } else if (diffHours - weeklyHours < 8 && diffHours - weeklyHours > 1) {
+            } else if (diffHours - weeklyHours < 8 && diffHours - weeklyHours > 1 && weeklyHours < 40) {
                 browser.browserAction.setBadgeBackgroundColor({color: "#b2b200"});
+            } else if (weeklyHours > 40) {
+                browser.browserAction.setBadgeBackgroundColor({color: "#0000ff"});
             } else {
                 browser.browserAction.setBadgeBackgroundColor({color: "#ff0000"});
             }
@@ -47,4 +49,3 @@ function popupMsg(message) {
 Assign `notify()` as a listener to messages from the content script.
 */
 chrome.runtime.onMessage.addListener(popupMsg);
-

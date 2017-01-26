@@ -79,7 +79,7 @@ $('#add').bind('click', function() {
             } else {
                 chrome.runtime.sendMessage({"type": "alert","msg": "Job EWS" + ews + " [" + hours + " hours] added to RATS log."});
             }
-            chrome.runtime.sendMessage({"type": "badge","msg": "something"});
+            chrome.runtime.sendMessage({"type": "badge","msg": "null"});
             }
         //window.close();     
     });
@@ -161,77 +161,4 @@ function getWeekNumber(d) {
     // Return array of year and week number
     //return [d.getFullYear(), weekNo];
     return weekNo;
-}
-function updateBadge() {
-    var theDate = new Date();
-    var theDate2 = theDate.toJSON();
-
-    //Return start of the week
-    var startDate = new Date(theDate.getFullYear(),theDate.getMonth(),theDate.getDate() - (theDate.getDay() + 1)).toJSON();
-
-    //Retrieve all docs
-    chrome.storage.local.get(null, function(obj) {
-        var weeklyHours = 0; 
-        var objKeys = Object.keys(obj);
-
-        if (objKeys.length > 0) {
-          //Separate into variables
-            for (var i=0;i<objKeys.length;i++) {
-                var rat_data = JSON.stringify(objKeys[i]);
-                var rat_data_parsed = JSON.parse(rat_data);
-                //var num = i;
-                weeklyHours = weeklyHours + Number(rat_data_parsed.hours);
-                console.log(rat_data);
-            }
-        }
-        var startDate2 = new Date(startDate);
-        var timeDiff = Math.abs(theDate.getTime() - startDate2.getTime());
-        var diffHours = (Math.ceil(timeDiff / 3.6e6)-48)*0.3333; //-48 to get mon, *.333 to get 8 hours per day (start date is Sat)
-        chrome.browserAction.setBadgeText ( { text: weeklyHours } );
-        if (diffHours - weeklyHours <= 1) {
-            browser.browserAction.setBadgeBackgroundColor({color: "#009900"});
-        } else if (diffHours - weeklyHours < 8 && diffHours - weeklyHours > 1) {
-            browser.browserAction.setBadgeBackgroundColor({color: "#b2b200"});
-        } else {
-            browser.browserAction.setBadgeBackgroundColor({color: "#ff0000"});
-        }
-        
-    });
-    
-    
-    //var db = new PouchDB('RATS');
-    //var options = {startkey : startDate, endkey : theDate2, include_docs : true};
-    function OLDDELETE() {
-        var weeklyHours = 0;
-        db.allDocs(options, function (err, response) {
-            if (response && response.rows.length > 0) {
-              //Separate into variables
-                for (var i=0;i<response.rows.length;i++) {
-                    var rat_data = JSON.stringify(response.rows[i].doc);
-                    var rat_data_parsed = JSON.parse(rat_data);
-                    //var num = i;
-                    weeklyHours = weeklyHours + Number(rat_data_parsed.hours);
-                }
-            }
-            //Update badge
-            var startDate2 = new Date(startDate);
-            var timeDiff = Math.abs(theDate.getTime() - startDate2.getTime());
-            var diffHours = (Math.ceil(timeDiff / 3.6e6)-48)*0.3333; //-48 to get mon, *.333 to get 8 hours per day (start date is Sat)
-            //rats_button.badge = weeklyHours;
-            //Update Badge
-            chrome.browserAction.setBadgeText ( { text: weeklyHours } );
-            if (diffHours - weeklyHours <= 1) {
-                //rats_button.badgeColor = "#009900";
-                browser.browserAction.setBadgeBackgroundColor({color: "#009900"});
-            } else if (diffHours - weeklyHours < 8 && diffHours - weeklyHours > 1) {
-                //rats_button.badgeColor = "#b2b200";
-                browser.browserAction.setBadgeBackgroundColor({color: "#b2b200"});
-            } else {
-                //rats_button.badgeColor = "#ff0000";
-                browser.browserAction.setBadgeBackgroundColor({color: "#ff0000"});
-            }
-
-          // handle err or response
-        });
-    }
 }

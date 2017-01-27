@@ -25,28 +25,42 @@
 
     var URLlocation = window.location.href;
     var EWSECE = URLlocation.split('=')[1];
+    var rats = "";
     var theDate = new Date();
     
-    //Remove 'EWS'
-    var n = EWSECE.indexOf("EWS"); 
+    //Determine which page visited
+    //Elastomer EWS
     var ews_chk = URLlocation.indexOf("in_ewr_");
+    
+    //Elastomer ECE
+    var ece_chk = URLlocation.indexOf("in_ece_");
+    
+    //RC Work order
+    var wo_chk = URLlocation.indexOf("in_wo_");
+    
     if (ews_chk > -1){
-        //EWS
-        if (n > -1){
-            EWSECE = EWSECE.substr(3, 7);
-        } 
-    } else {
-        //ECE
-        EWSECE = document.querySelector("body > font:nth-child(2) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > font:nth-child(1) > p:nth-child(1) > b:nth-child(1)").textContent
+        //Remove 'EWS'
+        var n = EWSECE.indexOf("EWS"); 
+        if (n < -1){
+            EWSECE = "EWS" + EWSECE;
+        }
+    } else if (ece_chk > -1) {
+        //Grab ECE number from webpage
+        EWSECE = document.querySelector("body > font:nth-child(2) > table:nth-child(3) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2) > font:nth-child(1) > p:nth-child(1) > b:nth-child(1)").textContent;
+    } else if (wo_chk > -1) {
+        //Grab WO number from webpage
+        EWSECE = "WO" + document.querySelector("table.no14:nth-child(2) > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(2)").textContent;
+        //Grab RATS #
+        rats = document.querySelector(".four14 > tbody:nth-child(1) > tr:nth-child(1) > td:nth-child(6) > a:nth-child(3)").textContent;
     }
-           
+       
     //Add button action
     var add = document.getElementById("add");
     add.addEventListener("click", function() {
         var hours = document.getElementById("hours").value;
         var id = new Date().toJSON();
         var payload = {
-          "rats": "",
+          "rats": rats,
           "ews": EWSECE,
           "week": getWeekNumber(theDate),
           "desc": "", 
@@ -56,7 +70,7 @@
         dataObj[id] = payload;
         chrome.storage.local.set(dataObj, function() {
               console.log('Record saved');
-              browser.runtime.sendMessage({"type": "alert","msg": "Job EWS" + EWSECE + " [" + hours + " hours] added to RATS log."});
+              browser.runtime.sendMessage({"type": "alert","msg": "Job " + EWSECE + " [" + hours + " hours] added to RATS log."});
               chrome.runtime.sendMessage({"type": "badge","msg": "null"});
             });
         }, false);  

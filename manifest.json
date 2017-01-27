@@ -16,7 +16,8 @@
     "notifications", 
     "storage",
     "tabs",
-    "clipboardWrite"
+    "clipboardWrite",
+    "downloads"
   ], 
 
   "background": {
@@ -40,7 +41,7 @@
 
   "content_scripts": [
     {
-      "matches": ["*://*/pls/prod/ece_ewo_web.ece_ewo_page?in_ewr_no=EWS*", "*://*/pls/prod/ece_ewo_web.ece_ewo_page?in_ewr_id=*","*://*/pls/prod/ece_web.ece_page?in_ece_id=*"],
+      "matches": ["*://*/pls/prod/ece_ewo_web.ece_ewo_page?in_ewr_no=EWS*", "*://*/pls/prod/ece_ewo_web.ece_ewo_page?in_ewr_id=*","*://*/pls/prod/ece_web.ece_page?in_ece_id=*", "*://*/pls/prod/worc_wo_rpt.wo_view?in_wo_no=*", "*://*/pls/prod/worc_wo_rpt.wo_view?in_wo_id=*"],
       "js": ["js/rats-ews-ece.js"],
       "css": ["css/style.css"]
     }

@@ -41,6 +41,36 @@ function popupMsg(message) {
             }
             
         });
+    } else if (message.type == "export") {
+        chrome.storage.local.get(null, function(items) { // null implies all items
+            // Convert object to a string.
+            var result = JSON.stringify(items);
+
+            function onStartedDownload(id) {
+              console.log(`Started downloading: ${id}`);
+            }
+
+            function onFailed(error) {
+              console.log(`Download failed: ${error}`);
+            }
+            var theDate = Date.parse(new Date());
+            //var downloadUrl = 'data:application/json;base64,' + btoa(result);
+            var blob = new Blob([result], {
+                type: 'data:application/json;base64'
+            });
+            var url = URL.createObjectURL(blob);
+            var downloading = browser.downloads.download({
+              url : url,
+              filename : 'RATS_History_' + theDate + '.json',
+              conflictAction : 'uniquify'
+            });
+
+            downloading.then(onStartedDownload, onFailed);
+        });
+        
+
+
+
     }
 
 }

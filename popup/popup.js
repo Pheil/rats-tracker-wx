@@ -143,7 +143,7 @@ $('#entry').bind('click', function() {
 });
 
 $('#export').bind('click', function() {
-	//Nothing yet
+    browser.runtime.sendMessage({"type": "export","msg": "null"});
 	window.close();     
 });
 

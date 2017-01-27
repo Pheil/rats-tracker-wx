@@ -30,32 +30,38 @@ table.addEventListener('click', selectCell);
 document.body.addEventListener('keyup', afterCopyCell);
 
 
-
 function logText() {
   // 'this' is automatically passed to the named
   // function via the use of addEventListener()
   // (later):
     var succeeded;
-    var copyFrom = document.createElement("textarea");
-        copyFrom.setAttribute('style', 'display:block;');
-        copyFrom.id = "copyField";
-        copyFrom.textContent = this.textContent;
-    var body = document.getElementsByTagName('body')[0];
-        body.appendChild(copyFrom);
     try {
-        copyFrom.select();
-        //document.execCommand('copy');
+        SelectText(this.id);
         // Copy it to the clipboard
         succeeded = document.execCommand("copy");
     } catch (e) {
         succeeded = false;
     }
     if (succeeded) {
-        console.log("The copy was successful!");
-        copyFrom.setAttribute('style', 'display:none;');
-        body.removeChild(copyFrom); 
+        //console.log("Copy successful!");
     } else {
-        console.log("The copy failed :(");
+        //console.log("Copy failed :(");
+    }
+}
+
+function SelectText(element) {
+    var doc = document;
+    var text = doc.getElementById(element);    
+    if (doc.body.createTextRange) { // ms
+        var range = doc.body.createTextRange();
+        range.moveToElementText(text);
+        range.select();
+    } else if (window.getSelection) {
+        var selection = window.getSelection();
+        var range = doc.createRange();
+        range.selectNodeContents(text);
+        selection.removeAllRanges();
+        selection.addRange(range);
     }
 }
 
@@ -120,31 +126,58 @@ function updateRecords() {
                 var ews  = val.ews;
                 var week  = val.week;
                 var desc  = val.desc || "None";
-                var hours  = val.hours;
+                var hours  = val.hours || 0;
                 var table = document.getElementById('rats-log-tbody');
+                //Type of job
+                var jtype = "";
+                var n_ews = ews.indexOf("EWS"); 
+                var n_ece = ews.indexOf("ECE"); 
+                var n_wo = ews.indexOf("WO"); 
+                if (n_ews > -1){
+                    jtype = "EWS";
+                    ews = ews.slice(3);
+                } else if (n_ece > -1) {
+                    jtype = "ECE";
+                } else if (n_wo > -1) {
+                    
+                    console.log(ews);
+                    jtype = "WO";
+                    //ews = ews.slice(2);
+                } else {
+                    jtype = "N/A";
+                }
                 
                 function addRow() {
                     //Add data from array to table
                     var newRow   = table.insertRow(0);
-                    var newCell_1  = newRow.insertCell(0);
-                    var newText_1  = document.createTextNode(rats);
-                    newCell_1.appendChild(newText_1);
+                    var newCell_0  = newRow.insertCell(0);
+                    var newText_0  = document.createTextNode(rats);
+                    newCell_0.appendChild(newText_0);
+                    newCell_0.setAttribute('id', rats);
                     
-                    var newCell_2  = newRow.insertCell(1);
+                    var newCell_1  = newRow.insertCell(1);
+                    var newText_1  = document.createTextNode(jtype);
+                    newCell_1.appendChild(newText_1);
+                    newCell_1.setAttribute('id', row);
+                    
+                    var newCell_2  = newRow.insertCell(2);
                     var newText_2  = document.createTextNode(ews);
                     newCell_2.appendChild(newText_2);
+                    newCell_2.setAttribute('id', ews);
                     
-                    var newCell_3  = newRow.insertCell(2);
+                    var newCell_3  = newRow.insertCell(3);
                     var newText_3  = document.createTextNode(week);
                     newCell_3.appendChild(newText_3);
                     
-                    var newCell_4  = newRow.insertCell(3);
+                    var newCell_4  = newRow.insertCell(4);
                     var newText_4  = document.createTextNode(desc);
                     newCell_4.appendChild(newText_4);
+                    newCell_4.setAttribute('id', desc + ews);
                     
-                    var newCell_5  = newRow.insertCell(4);
+                    var newCell_5  = newRow.insertCell(5);
                     var newText_5  = document.createTextNode(hours);
                     newCell_5.appendChild(newText_5);
+                    newCell_5.setAttribute('id', hours + ews);
                 }    
                 //Check if ews already exists in table
                 //to do:  change week to "m" if combining different weeks
@@ -157,8 +190,8 @@ function updateRecords() {
                     var rows = table.getElementsByTagName('tr').length;
                     //for (var curRow=rows; curRow >= 0; curRow--) {
                     for (i = 0; i < rows; i++) {
-                        var curEWS = table.rows[i].cells[1].textContent;
-                        mul_wk = table.rows[i].cells[2].textContent;
+                        var curEWS = table.rows[i].cells[2].textContent;
+                        mul_wk = table.rows[i].cells[3].textContent;
                         if (curEWS == ews) {
                             exists = true;
                             upRow = i;
@@ -169,9 +202,9 @@ function updateRecords() {
                 }
                 
                 if (exists === true) {
-                    table.rows[upRow].cells[4].textContent = parseInt(table.rows[upRow].cells[4].textContent) + parseInt(hours);
-                    if (table.rows[upRow].cells[2].textContent != week) {
-                        table.rows[upRow].cells[2].textContent = table.rows[upRow].cells[2].textContent + "/" + week;
+                    table.rows[upRow].cells[5].textContent = parseInt(table.rows[upRow].cells[5].textContent) + parseInt(hours);
+                    if (table.rows[upRow].cells[3].textContent != week) {
+                        table.rows[upRow].cells[3].textContent = table.rows[upRow].cells[3].textContent + "/" + week;
                     }
                 } else {
                     if (moment(key).isBetween(startDate, endDate)){
@@ -196,29 +229,13 @@ function updateRecords() {
     
 $("#from").datepicker({
   onSelect: function(dateText) {
-    var fromDate = $( "#from" ).datepicker( "getDate" );
-    var toDate = $( "#to" ).datepicker( "getDate" );
-    if (fromDate>toDate) {
-        $( "#to" ).datepicker( "setDate", fromDate + "+7d" );
-    }
+    $('#to').datepicker('option', 'minDate', $("#from").datepicker("getDate"));
     updateRecords();
   }
 });
-// $("#from").datepicker({
-  // onClose: function( selectedDate ) {
-    // $( "#to" ).datepicker( "setDate", selectedDate );
-  // }
-// });
 $("#to").datepicker({
   onSelect: function(dateText) {
-    //var fromDate = $( "#from" ).datepicker( "getDate" );
-    //var toDate = $( "#to" ).datepicker( "getDate" );
+    $('#from').datepicker('option', 'maxDate', $("#to").datepicker("getDate"));
     updateRecords();
   }
 });
-// $("#to").datepicker({
-  // onClose: function( selectedDate ) {
-      
-    // //$( "#from" ).datepicker( "setDate", selectedDate );
-  // }
-// });

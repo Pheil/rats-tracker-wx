@@ -20,11 +20,15 @@
     display: block;
     float: left;
     margin-top: 1px;
-    margin-left: 15px;
+    margin-left: 75px;
 }
 
 .add {
     background-position: -24px 0;
+}
+
+.save {
+    background-position: -97px -28px;
 }
 
 .log {
@@ -35,32 +39,39 @@
     background-position: -48px 0;
 }
 
+.save-text {
+    text-align: center;
+    position:fixed;
+    float: left;
+    margin-left: -40px;
+}
+
 .export {
     background-position: -72px 0;
 }
-/* input[type="text"] {
-    font-size: 12px;
-    width: 10em;
-    border: 1px solid #cac9c9;
-}
-input[type="number"] {
-    font-size: 12px;
-    -moz-appearance:textfield;
-    width: 5em;
-    border: 1px solid #cac9c9;
-} */
+
 #ews {
-	width:25%;
+	width:5em;
 	text-align: center;
 	padding:0px;
 	position:relative;
 }
 
 #rats {
-	width:50%;
+	width:6.5em;
 	text-align: center;
-	padding:0px;
+	padding:6px;
 	position:relative;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+#suggestions {
+    width: 100%;
+    padding: 0px;
+	position:relative;
+    margin-top: -24px;
+    margin-left: 102px;
 }
 #desc {
 	width:100%;
@@ -69,7 +80,7 @@ input[type="number"] {
 }
 
 #hour {
-	width:25%;
+	width:3em;
 	padding:0px;
 	position:relative;
 }
@@ -121,4 +132,71 @@ input[type="number"] {
 .panel-section-footer-button-small.default:hover:active {
   background-color: #005bab;
   box-shadow: 0 1px 0 #004480 inset;
+}
+
+.typeahead,
+.tt-query,
+.tt-hint {
+  height: 11px;
+  padding: 0px;
+  font-size: 11px;
+  border: 2px solid #ccc;
+  outline: none;
+}
+
+.typeahead {
+  background-color: #fff;
+  height: 18px;
+}
+
+.typeahead:focus {
+  border: 1px solid #000;
+}
+
+.tt-query {
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+
+.tt-hint {
+  color: #999
+}
+
+.tt-menu {
+    max-height: 165px;
+    overflow-y: auto;
+    width: 210px;
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin-left: -103px;
+}
+
+.tt-suggestion {
+  padding: 0;
+  margin: 0;
+  font-size: 10px;
+  line-height: 100%;
+}
+
+.tt-suggestion:hover {
+  padding: 0px 0px 0px 0px; /*  top, right, bottom, left */
+  cursor: pointer;
+  color: #fff;
+  background-color: #0097cf;
+  line-height: 100%;
+}
+
+.tt-suggestion.tt-cursor {
+  color: #fff;
+  background-color: #0097cf;
+}
+
+.tt-suggestion p {
+  margin: 0;
+}
+
+.gist {
+  font-size: 11px;
 }

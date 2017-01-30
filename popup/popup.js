@@ -14,26 +14,37 @@ $('#add').bind('click', function() {
 			_id.id = "_id";
 		var ews = document.createElement("input");
 			ews.setAttribute('type', 'text');
-			ews.setAttribute('placeholder', 'EWS');
+			ews.setAttribute('placeholder', '#####');
+            ews.setAttribute('title', 'EWS,  ECE, or WO Number');
 			ews.id = "ews";
-		var rats = document.createElement("input");
-			rats.setAttribute('type', 'text');
-			rats.setAttribute('placeholder', 'RATS');
-			rats.id = "rats";
+        var rats_div = document.createElement("div");
+			rats_div.setAttribute('id', 'suggestions');
+		var rats_i = document.createElement("input");
+			rats_i.setAttribute('type', 'text');
+			rats_i.setAttribute('placeholder', 'E10000#');
+			rats_i.setAttribute('id', 'rats');
+			rats_i.setAttribute('class', 'typeahead');
+            rats_i.setAttribute('title', '10 or 11 digit RATS Number');
+			rats_i.id = "rats";
+        rats_div.appendChild(rats_i);
+    
 		var desc = document.createElement("input");
 			desc.setAttribute('type', 'text');
 			desc.setAttribute('placeholder', 'Description');
+            desc.setAttribute('title', 'Additional job details.');
 			desc.id = "desc";
 		var hour = document.createElement("input");
 			hour.setAttribute('type', 'number');
+            hour.setAttribute('title', 'Hours');
+            hour.setAttribute('value', 0);
 			hour.id = "hour";
 		var save = document.createElement("div");
 			save.setAttribute('class', 'panel-section panel-section-footer-small');
-			save.innerHTML = "<div class='panel-section-footer-button-small' id='save'><i class='save button2'></i>Save<span class='text-shortcut'></span></div>";
+			save.innerHTML = "<div class='panel-section-footer-button-small' id='save'><i class='save button2'></i><span class='save-text '>Save</span></div>";
 		div.appendChild(_id);
 		div.appendChild(hour);
 		div.appendChild(ews);
-		div.appendChild(rats);
+		div.appendChild(rats_div);
 		div.appendChild(desc);
 		div.appendChild(save);
 			
@@ -83,7 +94,49 @@ $('#add').bind('click', function() {
             }
         //window.close();     
     });
-	//window.close();     
+	//window.close(); 
+
+    var rats = new Bloodhound({
+      //datumTokenizer: Bloodhound.tokenizers.obj.whitespace('ratn'),
+      datumTokenizer: function(d){
+            var tokens = [];
+            //the available string is 'ratn' in your datum
+            var stringSize = d.ratn.length;
+            //multiple combinations for every available size
+            //(eg. dog = d, o, g, do, og, dog)
+            for (var size = 1; size <= stringSize; size++){          
+              for (var i = 0; i+size<= stringSize; i++){
+                  tokens.push(d.ratn.substr(i, size));
+              }
+            }
+
+            return tokens;
+        },
+      queryTokenizer: Bloodhound.tokenizers.whitespace,
+      prefetch: {
+        url: 'rats.json',
+        cache: true,
+        ttl: 604800000
+      }
+    });
+
+    $('#suggestions .typeahead').typeahead(null, {
+      name: 'rats-list',
+      display: 'ratn',
+      hint: true,
+      highlight: true,
+      minLength: 0,
+      source: rats,
+      limit: 250,
+      templates: {
+        empty: [
+          'Unable to find matches.'
+        ].join('\n'),
+        suggestion: function (data) {
+            return '<p><strong>' + data.ratn + '</strong> - ' + data.desc + '</p>';
+        }
+      }
+    });
 });
 
 function saveRATStoFile(e) {

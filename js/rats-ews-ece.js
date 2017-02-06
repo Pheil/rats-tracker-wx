@@ -1,10 +1,10 @@
 //Create "add" button
-    var a = document.createElement('a');    
+    var a = document.createElement('a');
+        a.setAttribute('id', 'add');
         a.setAttribute('class', 'btn-floating no-print');
         a.setAttribute('draggable', 'true');
         
     var div_i = document.createElement('i');
-        div_i.setAttribute('id', 'add');
         div_i.textContent = "+";
         div_i.setAttribute('title', 'Add to RATS');
     a.appendChild(div_i);
@@ -92,7 +92,7 @@
     chrome.storage.local.get({
         myHour: ''
     }, function(items) {
-        var myHour = items.myHour;
+        var myHour = items.myHour || 1;
         var hourInp = document.getElementById("hours");
         hourInp.setAttribute('value', myHour);
         hourInp.value = myHour;

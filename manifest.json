@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "RATS Tracker",
   "short_name": "RATS Tracker",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "homepage_url": "http://tamilan.na.ten/cae/#Tools",
   "description": "RATS log assistant",
   "icons": {
@@ -42,7 +42,7 @@
   "content_scripts": [
     {
       "matches": ["*://*/pls/prod/ece_ewo_web.ece_ewo_page?in_ewr_no=EWS*", "*://*/pls/prod/ece_ewo_web.ece_ewo_page?in_ewr_id=*","*://*/pls/prod/ece_web.ece_page?in_ece_id=*", "*://*/pls/prod/worc_wo_rpt.wo_view?in_wo_no=*", "*://*/pls/prod/worc_wo_rpt.wo_view?in_wo_id=*"],
-      "js": ["js/rats-ews-ece.js"],
+      "js": ["lib/moment.js", "js/rats-ews-ece.js"],
       "css": ["css/style.css"]
     }
   ]

@@ -1,13 +1,14 @@
-.update {
-    border: none;
-    background: #FFF;
+html { 
+    background: url(../images/icon_o-256.png) no-repeat center center fixed; 
+    background-position: 50% 50%;
+    background-size: 256px;
 }
 .tg {
     border-collapse: collapse;
     border-spacing: 0;
     border-color: #bbb;
     margin: 0px auto;
-    width:90%;
+    width:100%;
 }
 .tg td {
     font-family: Arial, sans-serif;

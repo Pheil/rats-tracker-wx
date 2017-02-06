@@ -190,7 +190,8 @@ function saveRATStoFile(e,newData) {
     dataObj[id] = payload;
     chrome.storage.local.set(dataObj, function() {
           console.log('Record updated to "' + newData + '"');
-        });
+          chrome.runtime.sendMessage({"type": "badge","msg": "null"});
+    });
     
 }
 

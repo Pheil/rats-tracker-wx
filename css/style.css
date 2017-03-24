@@ -8,13 +8,7 @@
   -khtml-user-drag: element;
   -webkit-user-drag: element;
 }
-@media print
-{    
-    .no-print, .no-print *
-    {
-        display: none !important;
-    }
-}
+
 ::selection {
   background: #ffb7b7; /* WebKit/Blink Browsers */
   color: rgb(0, 0, 0);

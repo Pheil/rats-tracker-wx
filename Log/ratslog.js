@@ -1,143 +1,6 @@
-var TgTableSort = window.TgTableSort || function(n, t) {
-    "use strict";
-
-    function r(n, t) {
-        for (var e = [], o = n.childNodes, i = 0; i < o.length; ++i) {
-            var u = o[i];
-            if ("." == t.substring(0, 1)) {
-                var a = t.substring(1);
-                f(u, a) && e.push(u);
-            } else u.nodeName.toLowerCase() == t && e.push(u);
-            var c = r(u, t);
-            e = e.concat(c)
-        }
-        return e;
-    }
-
-    function e(n, t) {
-        var e = [],
-            o = r(n, "tr");
-        return o.forEach(function(n) {
-            var o = r(n, "td");
-            t >= 0 && t < o.length && e.push(o[t])
-        }), e
-    }
-
-    function o(n) {
-        return n.textContent || n.innerText || "";
-    }
-
-    function i(n) {
-        return n.innerHTML || "";
-    }
-
-    function u(n, t) {
-        var r = e(n, t);
-        return r.map(o);
-    }
-
-    function a(n, t) {
-        var r = e(n, t);
-        return r.map(i);
-    }
-
-    function c(n) {
-        var t = n.className || "";
-        return t.match(/\S+/g) || [];
-    }
-
-    function f(n, t) {
-        return -1 != c(n).indexOf(t);
-    }
-
-    function s(n, t) {
-        f(n, t) || (n.className += " " + t);
-    }
-
-    function d(n, t) {
-        if (f(n, t)) {
-            var r = c(n),
-                e = r.indexOf(t);
-            r.splice(e, 1), n.className = r.join(" ");
-        }
-    }
-
-    function v(n) {
-        d(n, L), d(n, E);
-    }
-
-    function l(n, t, e) {
-        r(n, "." + E).map(v), r(n, "." + L).map(v), e == T ? s(t, E) : s(t, L);
-    }
-
-    function g(n) {
-        return function(t, r) {
-            var e = n * t.str.localeCompare(r.str);
-            return 0 == e && (e = t.index - r.index), e
-        }
-    }
-
-    function h(n) {
-        return function(t, r) {
-            var e = +t.str,
-                o = +r.str;
-            return e == o ? t.index - r.index : n * (e - o);
-        }
-    }
-
-    function m(n, t, r) {
-        var e = u(n, t),
-            o = e.map(function(n, t) {
-                return {
-                    str: n,
-                    index: t
-                };
-            }),
-            i = e && -1 == e.map(isNaN).indexOf(!0),
-            a = i ? h(r) : g(r);
-        return o.sort(a), o.map(function(n) {
-            return n.index;
-        })
-    }
-
-    function p(n, t, r, o) {
-        for (var i = f(o, E) ? N : T, u = m(n, r, i), c = 0; t > c; ++c) {
-            var s = e(n, c),
-                d = a(n, c);
-            s.forEach(function(n, t) {
-                n.innerHTML = d[u[t]];
-            })
-        }
-        l(n, o, i);
-    }
-
-    function x(n, t) {
-        var r = t.length;
-        t.forEach(function(t, e) {
-            t.addEventListener("click", function() {
-                p(n, r, e, t);
-            }), s(t, "tg-sort-header");
-        })
-    }
-    var T = 1,
-        N = -1,
-        E = "tg-sort-asc",
-        L = "tg-sort-desc";
-    return function(t) {
-        var e = n.getElementById(t),
-            o = r(e, "tr"),
-            i = o.length > 0 ? r(o[0], "td") : [];
-        0 == i.length && (i = r(o[0], "th"));
-        for (var u = 1; u < o.length; ++u) {
-            var a = r(o[u], "td");
-            if (a.length != i.length) return;
-        }
-        x(e, i);
-    }
-}(document);
-document.addEventListener("DOMContentLoaded", function(n) {
-    TgTableSort("rats-log");
-});
+//document.addEventListener("DOMContentLoaded", function(n) {
+    //TgTableSort("rats-log");
+//});
 
 function closeInput() {
     var td = this.parentNode;
@@ -145,9 +8,9 @@ function closeInput() {
     td.removeChild(this);
     td.textContent = value;
     //Current values
-    var row = document.getElementById(td.parentNode.id);
-    var cell = row.getElementsByTagName("td");
-    var rats = cell[1].textContent,
+    var row = document.getElementById(td.parentNode.id),
+        cell = row.getElementsByTagName("td"),
+        rats = cell[1].textContent,
         ews = cell[2].textContent,
         week = cell[3].textContent,
         desc = cell[4].textContent,
@@ -217,7 +80,7 @@ function addInput() {
 chrome.storage.local.get(null, function(obj) {
     //console.log(obj);
     //console.log(Object.values(obj));
-    var objKeys = Object.keys(obj);
+    //var objKeys = Object.keys(obj);
     //console.log(objKeys.length);
     //console.log(objKeys[0]);
     var row = 0;
@@ -225,13 +88,15 @@ chrome.storage.local.get(null, function(obj) {
         const val = obj[key];
         //Separate into variables
             row = row+1;
-            var id  = key;
-            var rats  = val.rats;
-            var ews  = val.ews;
-            var week  = val.week;
-            var desc  = val.desc;
-            var hours  = val.hours;
-            var table = document.getElementById('rats-log');
+            var id  = key,
+                rats  = val.rats,
+                ews  = val.ews,
+                week  = val.week,
+                desc  = val.desc,
+                hours  = val.hours,
+                table = document.getElementById('rats-log'),
+                BackgroundRED = '',
+                BackgroundBLUE = '';
             
             function isEven(n) 
             {
@@ -241,20 +106,20 @@ chrome.storage.local.get(null, function(obj) {
             {
                return Math.abs(n) % 2 == 1;
             }
-            var theDate = new Date(id);
+            //var theDate = new Date(id);
             if (isEven(Number(week))) {
-                var a = Number(week)+100;
-                var b = Number(week)+100;
-                var c = theDate.getMonth()*0.05;
+                BackgroundRED = Number(week)+100;
+                BackgroundBLUE = Number(week)+100;
+                //var c = theDate.getMonth()*0.05;
             }
             if (isOdd(Number(week))) {
-                var a = Number(week)+200;
-                var b = Number(week)+200;
-                var c = theDate.getMonth()*0.1;
+                BackgroundRED = Number(week)+200;
+                BackgroundBLUE = Number(week)+200;
+                //var c = theDate.getMonth()*0.1;
             }
                 
             var newRow   = table.insertRow(row+1);
-            newRow.setAttribute("style", "background-color:rgba(" + a + ",240," + b + "," + c + ");");
+            newRow.setAttribute("style", "background-color:rgba(" + BackgroundRED + ",240," + BackgroundBLUE + ",.6);");
             newRow.setAttribute("id", id);
             var newCell_1  = newRow.insertCell(0);
             var newText_1  = document.createTextNode(id);

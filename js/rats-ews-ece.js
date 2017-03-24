@@ -1,3 +1,17 @@
+//Add style to head to avoid print issue
+var css = '@media print { .no-print, .no-print *    { display: none !important; } }',
+    head = document.head || document.getElementsByTagName('head')[0],
+    style = document.createElement('style');
+
+style.type = 'text/css';
+if (style.styleSheet){
+  style.styleSheet.cssText = css;
+} else {
+  style.appendChild(document.createTextNode(css));
+}
+
+head.appendChild(style);
+
 //Create "add" button
     var a = document.createElement('a');
         a.setAttribute('id', 'add');
@@ -12,13 +26,14 @@
 //Create hours input
     var hours = document.createElement('input'); 
         hours.setAttribute('id', 'hours');
-        hours.setAttribute('class', 'hours');
+        hours.setAttribute('class', 'hours no-print');
         hours.setAttribute('type', 'number'); 
     a.appendChild(hours);
     
 //Create empty bubble
     var div = document.createElement('div');
         div.setAttribute('id', 'empt');
+        div.setAttribute('class', 'no-print');
     a.appendChild(div);
     
     document.body.appendChild(a);

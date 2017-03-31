@@ -123,7 +123,7 @@ function updateRecords() {
                 row = row+1;
                 var id  = key;
                 var rats  = val.rats || "-";
-                var ews  = val.ews;
+                var ews  = val.ews || "-";
                 var week  = val.week;
                 var desc  = val.desc || "None";
                 var hours  = val.hours || 0;

@@ -72,7 +72,7 @@ $('#add').bind('click', function() {
         }
         
         if (hours<=0) {
-            browser.runtime.sendMessage({"type": "alert","msg": "Invalid hours, must be a number and greater than 0."});
+            chrome.runtime.sendMessage({"type": "alert","msg": "Invalid hours, must be a number and greater than 0."});
         } else {
             var theDate = new Date();
             var doc = {
@@ -196,7 +196,7 @@ $('#entry').bind('click', function() {
 });
 
 $('#export').bind('click', function() {
-    browser.runtime.sendMessage({"type": "export","msg": "null"});
+    chrome.runtime.sendMessage({"type": "export","msg": "null"});
 	window.close();     
 });
 

@@ -1,7 +1,7 @@
 // Saves options to chrome.storage.sync.
 function save_options() {
   var myHour = document.getElementById('defHour').value;
-  browser.storage.local.set({
+  chrome.storage.local.set({
     myHour: myHour
   }, function() {
     // Update status to let user know options were saved.
@@ -16,7 +16,7 @@ function save_options() {
 // Restores state using the preferences stored in chrome.storage.
 // function restore_options() {
 
-  // browser.storage.local.get({
+  // chrome.storage.local.get({
     // myHour: 1
   // }, function(items) {
     // document.getElementById('defHour').value = items.myHour;
@@ -24,7 +24,7 @@ function save_options() {
 // }
 
 function restore_options() {
-  var gettingItem = browser.storage.local.get('myHour');
+  var gettingItem = chrome.storage.local.get('myHour');
   gettingItem.then((res) => {
     document.querySelector("#defHour").value = res.myHour || "1";
   });

@@ -31,13 +31,13 @@ function popupMsg(message) {
             var diffHours = (Math.ceil(timeDiff / 3.6e6)-48)*0.3333; //-48 to get mon, *.333 to get 8 hours per day (start date is Sat)
             chrome.browserAction.setBadgeText ( { text: weeklyHours.toString() } );
             if (diffHours - weeklyHours <= 1 && weeklyHours < 40) {
-                browser.browserAction.setBadgeBackgroundColor({color: "#009900"});
+                chrome.browserAction.setBadgeBackgroundColor({color: "#009900"});
             } else if (diffHours - weeklyHours < 8 && diffHours - weeklyHours > 1 && weeklyHours < 40) {
-                browser.browserAction.setBadgeBackgroundColor({color: "#b2b200"});
+                chrome.browserAction.setBadgeBackgroundColor({color: "#b2b200"});
             } else if (weeklyHours > 40) {
-                browser.browserAction.setBadgeBackgroundColor({color: "#0000ff"});
+                chrome.browserAction.setBadgeBackgroundColor({color: "#0000ff"});
             } else {
-                browser.browserAction.setBadgeBackgroundColor({color: "#ff0000"});
+                chrome.browserAction.setBadgeBackgroundColor({color: "#ff0000"});
             }
             
         });
@@ -59,7 +59,7 @@ function popupMsg(message) {
                 type: 'data:application/json;base64'
             });
             var url = URL.createObjectURL(blob);
-            var downloading = browser.downloads.download({
+            var downloading = chrome.downloads.download({
               url : url,
               filename : 'RATS_History_' + theDate + '.json',
               conflictAction : 'uniquify'

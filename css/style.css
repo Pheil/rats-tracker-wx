@@ -47,11 +47,17 @@ input {
     text-align: center;
     border: none;
     -moz-appearance:textfield;
+    -webkit-appearance:textfield;
     display: none;
     background: rgb(13, 26, 23) none repeat scroll 0% 0%;
     color: rgb(255, 255, 255);
     font-size: 12px;
-    
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
 }
 
 .btn-floating {

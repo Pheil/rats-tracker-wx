@@ -85,7 +85,7 @@ head.appendChild(style);
         dataObj[id] = payload;
         chrome.storage.local.set(dataObj, function() {
               console.log('Record saved');
-              browser.runtime.sendMessage({"type": "alert","msg": "Job " + EWSECE + " [" + hours + " hours] added to RATS log."});
+              chrome.runtime.sendMessage({"type": "alert","msg": "Job " + EWSECE + " [" + hours + " hours] added to RATS log."});
               chrome.runtime.sendMessage({"type": "badge","msg": "null"});
             });
         }, false);  

@@ -17,6 +17,7 @@ head.appendChild(style);
         a.setAttribute('id', 'add');
         a.setAttribute('class', 'btn-floating no-print');
         a.setAttribute('draggable', 'true');
+        a.setAttribute('href', '#');
         
     var div_i = document.createElement('i');
         div_i.textContent = "+";
@@ -84,7 +85,7 @@ head.appendChild(style);
         var dataObj = {};
         dataObj[id] = payload;
         chrome.storage.local.set(dataObj, function() {
-              console.log('Record saved');
+              //console.log('Record saved');
               chrome.runtime.sendMessage({"type": "alert","msg": "Job " + EWSECE + " [" + hours + " hours] added to RATS log."});
               chrome.runtime.sendMessage({"type": "badge","msg": "null"});
             });

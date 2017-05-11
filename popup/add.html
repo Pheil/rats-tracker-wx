@@ -1,0 +1,57 @@
+<!doctype html>
+<html>
+    <head>
+		<meta content="text/html; charset=utf-8" http-equiv="Content-type">
+        <link href="../css/extension.css" rel="stylesheet"></link>
+		<link rel="stylesheet" href="panel-style.css" type="text/css" media="screen, projection"/>
+		<title>RATS LOG - ADD</title>
+
+        <style media="screen">
+          .icon-section-header {
+            background-image: url("../images/icon-128.png");
+            background-size: contain;
+          }
+
+          .panel-formElements-item label:first-child {
+            min-width: 5em;
+            margin-left: 0;
+          }
+
+          .panel-formElements-item label {
+            margin-left: calc(5em + 6px);
+          }
+
+        </style>
+    </head>
+
+    <body>
+        <div class="panel-section panel-section-header">
+          <div class="icon-section-header"></div>
+          <div class="text-section-header">Add</div>
+        </div>
+        <div class="panel-section panel-section-formElements">
+          <div id="suggestions" class="panel-formElements-item">
+            <input type="text" placeholder="RATS Number" id="rats" class="typeahead" title="10 or 11 digit RATS Number"/>
+          </div>
+          <div class="panel-formElements-item">
+            <input value="0" type="number" id="hour" title="Total Hours" onfocus="this.type='number';"/>
+          </div>
+          <div class="panel-formElements-item">
+            <input type="text" id="ews" placeholder="EWS / ECE / WO Number" title="EWS, ECE, or WO Number"/>
+          </div>
+          <div class="panel-formElements-item">
+            <input type="text" id="desc" placeholder="Job Description" title="Additional job details."/>
+          </div>
+        </div>
+        <div class="panel-section panel-section-footer">
+            <div class="panel-section-footer-button back" id="back">&lt;&lt; Back
+            </div>
+            <div class="panel-section-footer-button save" id="save"><i class="saveIMG button2"></i>Save
+            </div>
+        </div>
+        <input type="hidden" id="_id">
+        <script src="../lib/jquery-3.1.1.min.js"></script>
+        <script src="../lib/typeahead.bundle.js"></script>
+        <script src="add.js"></script>
+    </body>
+</html>

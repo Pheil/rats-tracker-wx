@@ -15,20 +15,19 @@
 }
 .button2 {
     background: url(../images/btn_icons.png) no-repeat 0 0;
-    width: 13px;
-    height: 13px;
     display: block;
     float: left;
-    margin-top: 1px;
-    margin-left: 75px;
+    margin-top: -5px;
+    height: 25px;
+    width: 25px;
 }
 
 .add {
     background-position: -24px 0;
 }
 
-.save {
-    background-position: -97px -28px;
+.saveIMG {
+    background-position: -97px -25px;
 }
 
 .log {
@@ -39,18 +38,11 @@
     background-position: -48px 0;
 }
 
-.save-text {
-    text-align: center;
-    position:fixed;
-    float: left;
-    margin-left: -40px;
-}
-
 .export {
     background-position: -72px 0;
 }
 
-#ews {
+/*#ews {
 	width:5em;
 	text-align: center;
 	padding:0px;
@@ -58,7 +50,7 @@
 }
 
 #rats {
-	width:6.5em;
+	width:5em;
 	text-align: center;
 	padding:6px;
 	position:relative;
@@ -66,7 +58,7 @@
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-#suggestions {
+ #suggestions {
     width: 100%;
     padding: 0px;
 	position:relative;
@@ -89,7 +81,7 @@
 	border: 1px solid #cac9c9;
 	margin-top: 39px;
 	position: absolute;
-}
+} */
 
 /* Panel Section - Small Footer */
 .panel-section-footer-small {
@@ -102,36 +94,28 @@
   margin-top: -1px;
   padding: 0;
 }
-.panel-section-footer-button-small {
-  flex: 1 1 auto;
-  height: 100%;
-  margin: 0 -1px;
-  padding: 2px;
-  text-align: center;
-  font-size: .847em;
+.back {
+    background-color: #e9e9e9;
 }
-.panel-section-footer-button-small:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+.back:hover {
+    background-color: rgba(222, 222, 222, 1);
 }
 
-.panel-section-footer-button-small:hover:active {
-  background-color: rgba(0, 0, 0, 0.1);
+.back:hover:active {
+    background-color: rgba(210, 210, 210, 1);
 }
 
-.panel-section-footer-button-small.default {
-  background-color: #0996f8;
-  box-shadow: 0 1px 0 #0670cc inset;
-  color: #fff;
+.save {
+    background-color: rgba(0, 148, 251, 1);
+    color: #fff;
 }
 
-.panel-section-footer-button-small.default:hover {
-  background-color: #0670cc;
-  box-shadow: 0 1px 0 #005bab inset;
+.save:hover {
+    background-color: rgba(0, 110, 207, 1);
 }
 
-.panel-section-footer-button-small.default:hover:active {
-  background-color: #005bab;
-  box-shadow: 0 1px 0 #004480 inset;
+.save:hover:active {
+    background-color: rgba(0, 89, 174, 1);
 }
 
 .typeahead,
@@ -170,7 +154,6 @@
     background-color: #fff;
     border: 1px solid #ccc;
     border: 1px solid rgba(0, 0, 0, 0.2);
-    margin-left: -103px;
 }
 
 .tt-suggestion {

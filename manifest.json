@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "RATS Tracker",
   "short_name": "RATS Tracker",
-  "version": "0.3.6",
+  "version": "0.3.7",
   "homepage_url": "http://170.64.172.49/cae/#Tools",
   "description": "RATS log assistant",
   "icons": {

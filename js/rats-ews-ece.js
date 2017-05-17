@@ -1,3 +1,4 @@
+"use strict";
 //Add style to head to avoid print issue
 var css = '@media print { .no-print, .no-print *    { display: none !important; } }',
     head = document.head || document.getElementsByTagName('head')[0],
@@ -17,7 +18,7 @@ head.appendChild(style);
         a.setAttribute('id', 'add');
         a.setAttribute('class', 'btn-floating no-print');
         a.setAttribute('draggable', 'true');
-        a.setAttribute('href', '#');
+        a.setAttribute('href', 'javascript:void(0)');
         
     var div_i = document.createElement('i');
         div_i.textContent = "+";
@@ -89,7 +90,7 @@ head.appendChild(style);
               chrome.runtime.sendMessage({"type": "alert","msg": "Job " + EWSECE + " [" + hours + " hours] added to RATS log."});
               chrome.runtime.sendMessage({"type": "badge","msg": "null"});
             });
-        }, false);  
+    }, false); 
     
     //Hour input
     a.addEventListener("mouseover", function() {

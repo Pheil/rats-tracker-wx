@@ -24,21 +24,20 @@ head.appendChild(style);
         div_i.textContent = "+";
         div_i.setAttribute('title', 'Add to RATS');
     a.appendChild(div_i);
+    document.body.appendChild(a);
 
 //Create hours input
     var hours = document.createElement('input'); 
         hours.setAttribute('id', 'hours');
         hours.setAttribute('class', 'hours no-print');
         hours.setAttribute('type', 'number'); 
-    a.appendChild(hours);
+    document.body.appendChild(hours);
     
 //Create empty bubble
     var div = document.createElement('div');
         div.setAttribute('id', 'empt');
         div.setAttribute('class', 'no-print');
-    a.appendChild(div);
-    
-    document.body.appendChild(a);
+    document.body.appendChild(div);
 
     var URLlocation = window.location.href;
     var EWSECE = URLlocation.split('=')[1];

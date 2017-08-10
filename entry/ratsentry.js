@@ -202,10 +202,13 @@ function updateRecords() {
                 }
                 
                 if (exists === true) {
-                    table.rows[upRow].cells[5].textContent = parseInt(table.rows[upRow].cells[5].textContent) + parseInt(hours);
-                    if (table.rows[upRow].cells[3].textContent != week) {
-                        table.rows[upRow].cells[3].textContent = table.rows[upRow].cells[3].textContent + "/" + week;
+                    if (moment(key).isBetween(startDate, endDate)){
+                        if (table.rows[upRow].cells[3].textContent != week) {
+                            table.rows[upRow].cells[3].textContent = table.rows[upRow].cells[3].textContent + "/" + week;
+                        }
                     }
+                    table.rows[upRow].cells[5].textContent = parseInt(table.rows[upRow].cells[5].textContent) + parseInt(hours);
+
                 } else {
                     if (moment(key).isBetween(startDate, endDate)){
                         addRow();

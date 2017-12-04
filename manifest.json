@@ -3,7 +3,7 @@
   "manifest_version": 2,
   "name": "RATS Tracker",
   "short_name": "RATS Tracker",
-  "version": "0.3.11",
+  "version": "0.3.12",
   "homepage_url": "http://170.64.172.49/cae/#Tools",
   "description": "RATS log assistant",
   "icons": {
@@ -49,7 +49,7 @@
 
   "content_scripts": [
     {
-      "matches": ["http://pafoap01/pls/prod/ece_ewo_web.ece_ewo_page?in_ewr_*", "http://pafoap01//pls/prod/ece_web.ece_page?in_ece_id=*", "*://*/pls/prod/worc_wo_rpt.wo_view?in_wo_no=*", "*://*/pls/prod/worc_wo_rpt.wo_view?in_wo_id=*"],
+      "matches": ["http://pafoap01/pls/prod/ece_ewo_web.ece_ewo_page?in_ewr_*", "http://pafoap01/pls/prod/ece_web.ece_page?in_ece_id=*", "http://pafoap01/pls/prod/worc_wo_rpt.wo_view?in_wo_no=*", "http://pafoap01/pls/prod/worc_wo_rpt.wo_view?in_wo_id=*"],
       "js": ["lib/moment.js", "js/rats-ews-ece.js"],
       "css": ["css/style.css"]
     }

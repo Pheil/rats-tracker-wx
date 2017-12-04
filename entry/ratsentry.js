@@ -206,8 +206,8 @@ function updateRecords() {
                         if (table.rows[upRow].cells[3].textContent != week) {
                             table.rows[upRow].cells[3].textContent = table.rows[upRow].cells[3].textContent + "/" + week;
                         }
+                        table.rows[upRow].cells[5].textContent = parseInt(table.rows[upRow].cells[5].textContent) + parseInt(hours);
                     }
-                    table.rows[upRow].cells[5].textContent = parseInt(table.rows[upRow].cells[5].textContent) + parseInt(hours);
 
                 } else {
                     if (moment(key).isBetween(startDate, endDate)){
